@@ -2,8 +2,7 @@ const express=require('express');
 const app=express();                        /********** setting express server ***********/
 const port=8000;
 
-
-
+const db=require('./config/mongoose');
 
 const expresslayouts=require('express-ejs-layouts'); /**require layouts before this do npm install express-ejs-layouts ******/
 
@@ -16,6 +15,7 @@ app.use(express.static('./assets'));
 
 app.set('view engine','ejs');           /*******ejs view, npm install ejs *********/
 app.set('views','./view');                    
+
 
 
 app.use('/',require('./routes'));                /******require route folder *******/
