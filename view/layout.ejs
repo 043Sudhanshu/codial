@@ -3,14 +3,18 @@
     <title>
        <%= title %>
     </title>
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+    <%- style%>
 </head>
 <body>
-     this is layout
+    * this is layout
     <%- include('_header'); %>
     
     <%- body %> 
   
     <%- include('_footer'); %>
+
+   <%- script %>
 </body>
 
 </html>
