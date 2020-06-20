@@ -2,9 +2,12 @@ const express=require('express');
 const app=express();                        /********** setting express server ***********/
 const port=8000;
 
+app.use(express.urlencoded());
+
 const db=require('./config/mongoose');
 
 const expresslayouts=require('express-ejs-layouts'); /**require layouts before this do npm install express-ejs-layouts ******/
+const { urlencoded } = require('express');
 
 app.use(expresslayouts);              /********use layout******/
 
@@ -19,17 +22,6 @@ app.set('views','./view');
 
 
 app.use('/',require('./routes'));                /******require route folder *******/
-
-
-
-
-
-
-
-
-
-
-
 
 
 
