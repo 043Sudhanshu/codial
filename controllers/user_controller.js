@@ -1,7 +1,9 @@
 const User=require('../model/user');
+
 module.exports.profile=function(req,res){
     res.render('profile',{title:"profile"});
 }
+
 module.exports.create=function(req,res){
    if(req.body.password!=req.body.confirm_password){
       res.redirect('back');
