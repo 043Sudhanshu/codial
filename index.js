@@ -3,7 +3,7 @@ const app=express();                        /********** setting express server *
 const port=8000;
 const expresslayouts=require('express-ejs-layouts');   /**require layouts before this do npm install express-ejs-layouts ******/
 
-const db=require('./config/mongoose');
+const db=require('./config/mongoose');             
 
                 // used for session cookie
 
@@ -12,7 +12,6 @@ const passport = require('passport');
 const passportLocal = require('./config/passport');
 
             /***************parse form data***************************/
-
 app.use(express.urlencoded());
              /*****************cookie parser *****************/
 const cookieParser = require('cookie-parser');
@@ -38,16 +37,17 @@ app.use(session({
     name:'codial',
      // TODO change the secret before deployment in production mode
     secret:'blahblah',
-    saveUnintialized:false,
-    resave:false,
+    saveUnintialized:false,         
+    resave:false,                   //we dont want to save cookie data again and again 
     cookie:{
-        maxAge:(1000*60*100)   //time in mili seconds
+        maxAge:(1000*60*100)         //cookie age in millisec
     }
 }));
  
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize());        
+app.use(passport.session());            //express-session uses passport to encrypt and decrypt 
 
+app.use(passport.setAuthenticateduser);      //making user available to ejs file
 
 app.use('/',require('./routes'));                /******require route folder *******/
 
