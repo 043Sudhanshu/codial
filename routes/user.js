@@ -14,6 +14,7 @@ router.get('/signup',user_controller.signup);
      'local',                                                  //middleware
      {failureRedirect:'/user/signin'}
  ),user_controller.createsession);
-
+  
+ 
 
 module.exports=router;

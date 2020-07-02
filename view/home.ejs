@@ -1,2 +1,19 @@
        <h1>u r at home</h1>
     
+   <%    if(locals.user){%>            // we have saved req.user into the locals in passport
+       <form action="/post/create" method="POST">
+              <textarea name="content" row="12" col="140" placeholder="type here.." required> </textarea>
+               <br>
+              <button type="submit">POST</button>
+       </form>
+
+
+       
+       <%for(i of posts){%>
+         <li>   
+              <%=i.content%>
+              :posted by <%=i.user.name%>
+         </li>
+       <%}%>
+
+       <%}%>
