@@ -1,1 +1,21 @@
-<h1> I m header </h1>
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<div class="j">
+    <div>
+<h1> codial </h1>
+
+</div>
+
+<div>
+<% if(locals.user){ %>
+<ul>
+    <li> <%= user.name %> </li>
+    <li>      <a href="/user/signout"> SIGNOUT</a>       </li>
+</ul>
+<%}else{%>
+    <ul>
+        <li>      <a href="/user/signin"> SIGNIN</a>       </li>
+        <li>      <a href="/user/signup"> SIGNUP </a>      </li>
+    </ul>
+ <%}%>
+</div>
+</div>

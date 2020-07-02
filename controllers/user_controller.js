@@ -7,10 +7,6 @@ module.exports.profile=function(req,res){
 }
 
 
-
-
-
-
 module.exports.create=function(req,res){
    if(req.body.password!=req.body.confirm_password){
       res.redirect('back');
@@ -26,7 +22,7 @@ module.exports.create=function(req,res){
         }
         else{
         console.log("this username exists");
-        return;
+        return res.redirect('back');
         }
         });
     }
@@ -35,9 +31,10 @@ module.exports.create=function(req,res){
 
     module.exports.signin=function(req,res){
         if(req.isAuthenticated()){                   //if the user is signed in,he cant access the sign in page
-         
+            
             return res.redirect('/user/profile');
         }
+        
         return   res.render('user_sign_in',{title:"signin"});
        
        }
@@ -49,13 +46,18 @@ module.exports.signup=function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/user/profile');          //if the user is signed in,he cant access the sign up page
     }
-    return   res.render('user_sign_in',{title:"signin"});
+    
+    return   res.render('user_sign_up',{title:"signup"});
 }
 
+module.exports.signout=function(req,res){
+    req.logout();
+    return res.redirect('/');
+}
 
 module.exports.createsession=function(req,res){
 
- return   res.redirect('/user/profile');
+ return   res.redirect('/');
 
 }
 

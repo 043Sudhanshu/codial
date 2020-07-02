@@ -8,9 +8,10 @@ const passport = require('passport');
 router.get('/profile',passport.checkAuthentication,user_controller.profile);
 router.get('/signup',user_controller.signup);    
  router.get('/signin',user_controller.signin);
+ router.get('/signout',user_controller.signout);
  router.post('/create',user_controller.create);
  router.post('/create_session',passport.authenticate(
-     'local',
+     'local',                                                  //middleware
      {failureRedirect:'/user/signin'}
  ),user_controller.createsession);
 
