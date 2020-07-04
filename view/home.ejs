@@ -1,19 +1,49 @@
        <h1>u r at home</h1>
     
-   <%    if(locals.user){%>            // we have saved req.user into the locals in passport
+
+<%if(locals.user){%>         
+   
+<div id='post-form'>
        <form action="/post/create" method="POST">
               <textarea name="content" row="12" col="140" placeholder="type here.." required> </textarea>
                <br>
               <button type="submit">POST</button>
        </form>
-
-
-       
+</div>
+        
+  
        <%for(i of posts){%>
-         <li>   
+            <li>   
               <%=i.content%>
-              :posted by <%=i.user.name%>
-         </li>
-       <%}%>
+              :posted by <%=i.user.name%>         
+      <!-- after populating the whole user object is coming if we dont populate then the user will be jus an id of it by which we cant fetch it
+      -->   </li> 
+<div id='post-comment'> 
+       <form action="/comment/create" method="POST">
+              <input type="text" name="comment" placeholder="ur comment">
+              <input type="hidden" name="postsid" value="<%=i._id %>"  >   
+              <button type="submit">comment</button>
+       </form>
+</div> 
+<% for(j of i.comments){%>
+         
+       <%= j.comment %>
+      <br>
+      <small>
+      <%= j.user.name %>
+      </small> 
+      <br>
+      
+       <%}%> 
 
-       <%}%>
+
+          <%}%>
+
+
+<%}%>
+       
+      
+
+
+
+        

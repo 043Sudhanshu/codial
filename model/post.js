@@ -9,7 +9,13 @@ const postschema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,    // stroing object id as refrence bcoz its unique
         ref:'User'    //which modelit is refering to
 
-    }
+    },
+    comments:[
+        {
+            type:mongoose.Schema.Types.ObjectId,    // stroing object id as refrence bcoz its unique
+            ref:'Comment'    //which modelit is refering to
+        }
+    ]
 },{timestamps:true});
 
 const post=mongoose.model('Post',postschema);
