@@ -1,0 +1,8 @@
+#main {
+  display: flex; }
+  #main #comment {
+    width: 70%; }
+  #main #friends {
+    width: 30%;
+    padding: 20px;
+    border-left: 2px solid gray; }
