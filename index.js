@@ -71,7 +71,7 @@ app.use('/',require('./routes'));                /******require route folder ***
 
 app.listen(port,function(err){                          /******server listening *********/
     if(err){
-        console.log(`Error is coming: ${err}`);
+        console.log(`Error-is coming: ${err}`);
         return;
     }
     console.log(`server is running at port:${port}`);

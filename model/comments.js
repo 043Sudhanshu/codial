@@ -12,9 +12,8 @@ const commentschema=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,    // stroing object id as refrence bcoz its unique
         ref:'User'                             //which model it is refering to // User is the name in database
-    }
-     ,
-     post:{
+    },
+    post:{
         type:mongoose.Schema.Types.ObjectId,    // storing object id of the post
         ref:'Post'                                 //which model it is refering to // User is the name in database
      }
