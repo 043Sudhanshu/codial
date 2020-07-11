@@ -1,0 +1,27 @@
+<%for(i of posts){%>
+            
+    <!-- delete post showing to the logged in user only -->
+
+    <%if( i.user.id==locals.user.id){%>
+      <a href='/post/destroy/<%=i._id%>'> X </a>
+    <%}%>
+  
+    <li>   
+     <%=i.content%> :posted by <%=i.user.name%>         
+<!-- after populating the whole user object is coming if we dont populate then the user will be jus an id of it by which we cant fetch it
+-->   </li> 
+
+<div id='post-comment'> 
+   <form action="/comment/create" method="POST">
+    <input type="text" name="comment" placeholder="ur comment">
+    <input type="hidden" name="postsid" value="<%=i._id %>"  >   
+    <button type="submit">comment</button>
+   </form>
+</div> 
+
+<!-- showing comments -->
+   
+      <%-include('_comment')-%>
+
+
+<%}%>

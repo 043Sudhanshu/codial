@@ -1,0 +1,17 @@
+<% for(j of i.comments){%>     
+
+    <%= j.comment %>
+    
+    :<%= j.user.name %> &nbsp 
+    <%if(i.user.id==locals.user.id){%>
+        <a href="/comment/delete/<%= j._id %>">X</a>         
+        <%}else{%>
+               
+    <%if(j.user.id==locals.user.id ){%>
+    <a href="/comment/delete/<%= j._id %>">X</a>
+    <%}%>
+    
+    <%}%>
+    <br> 
+    
+    <%}%>
