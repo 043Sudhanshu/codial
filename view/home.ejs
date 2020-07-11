@@ -18,6 +18,18 @@
       <%- include('_post') -%>
 <%}%> 
 
+<%if(locals.user){%>
+<h4> Friends </h4>
+<section id="all_friends">
+  <ul>
+  <%for(u of all_user){%>
+    <li>
+    <a href="user/profile/<%=u._id%>"><%= u.name %></a>
+     </li>
+  <%}%>
+</ul>
+</section>
 
+<%}%>
 
         

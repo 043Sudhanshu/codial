@@ -2,10 +2,23 @@ const User=require('../model/user');
 
 
 module.exports.profile=function(req,res){
-     
-  return  res.render('profile',{title:"profile"});
+     User.findById(req.params.id,function(err,user){
+        return  res.render('profile',{
+            title:"profile",
+            profile_user:user
+        });
+     });
 }
 
+module.exports.update=function(req,res){
+     if(req.params.id==req.user.id){
+       User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email},function(err,uss){});  
+       return res.redirect('back');
+     }
+     else{
+         return res.status(401).send('UNAUTHORIZED');
+     }
+}
 
 module.exports.create=function(req,res){
    if(req.body.password!=req.body.confirm_password){

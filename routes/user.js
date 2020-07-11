@@ -5,7 +5,8 @@ const router=express.Router();
 const user_controller=require('../controllers/user_controller.js');
 const passport = require('passport');
 
-router.get('/profile',passport.checkAuthentication,user_controller.profile);
+router.get('/profile/:id',passport.checkAuthentication,user_controller.profile);
+router.post('/update/:id',passport.checkAuthentication,user_controller.update);
 router.get('/signup',user_controller.signup);    
  router.get('/signin',user_controller.signin);
  router.get('/signout',user_controller.signout);
