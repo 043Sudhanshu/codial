@@ -4,10 +4,14 @@
        <%= title %>
     </title>
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
    
     <%- style%>
 </head>
 <body>
+  
+
     <%- include('_header'); %>
     
     <%- body %> 
@@ -15,6 +19,31 @@
     <%- include('_footer'); %>
 
    <%- script %>
+
+   <script>
+    
+    <%if(flas.success && flas.success.length>0){%>
+        new Noty({
+                theme:'relax',
+                text: '<%=flas.success%>',
+                type:'success',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+    <%}%>
+    <%if(flas.error && flas.error.length>0){%>
+        new Noty({
+                theme:'relax',
+                text: '<%=flas.error%>',
+                type:'error',
+                layout:'topLeft',
+                timeout:1500
+            }).show();
+    <%}%>
+    
+
+   </script>
+   
 </body>
 
 </html>

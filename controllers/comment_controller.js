@@ -1,5 +1,5 @@
-const comment=require('../model/comments');
-const post=require('../model/post');
+const comment= require('../model/comments');
+const post= require('../model/post');
 /*** while creating comment we have to consider two things
  * 1. creating the comment array in post so that it can be accessed quickly 
  * 2. bcoz if we dont have array in post to show then
@@ -23,6 +23,7 @@ module.exports.create=function(req,res){
             if(err){console.log('error in creating comment'); return;}
              post.comments.push(comment);   // automatically stores comment id in the array
              post.save();                   // save tells this is final version of change save it
+             req.flash('success','comment published!');
              res.redirect('back');
     });
   }
@@ -30,35 +31,64 @@ module.exports.create=function(req,res){
 }
     
 
-module.exports.delete=function(req,res){
+module.exports.delete=async function(req,res){
    
- comment.findById(req.params.id,function(err,comm){
- 
-  if(comm){  
-       //  req.user.id is string and req.user._id is object...we will use the req.user.id to compare
-    post.findById(comm.post,function(err,postuser){
-      
-      if(postuser.user== req.user.id || comm.user==req.user.id){
-       
-        let postid=comm.post;        //keeping it to delete the post because when we will delete the comm the post id in it will be lost
-       
-         comm.remove();
-                 // we are updating,this pull is syntax we are removing or pulling the comment id from the comment array..
-        post.findByIdAndUpdate(postid,{ $pull : {comments:comm.id} },function(err,post){
-            return res.redirect('back');
-        });
-      }
-  
-      else{
-      return res.redirect('back');
-      }
-  
-   });
-  }
-  else{
-    return res.redirect('back'); 
-  }
+     try{
+            let comm=await comment.findById(req.params.id);
 
-  });
+            if(comm){
+            
+              let postuser =await post.findById(comm.post);
+            
+            if(postuser.user==req.user.id || comm.user==req.user.id){
+
+              let postid=comm.post;
+              comm.remove();
+             let pp= await post.findByIdAndUpdate(postid,{$pull:{comments:comm.id}});
+             req.flash('success','comment deleted!');
+             return res.redirect('back');
+            
+            }else{
+              return res.redirect('back');
+            }
+
+            }else{
+              return res.redirect('back');
+            }
+
+        }
+    catch(err){
+    console.log("error",err);
+    return;
+    }
+
+//  comment.findById(req.params.id,function(err,comm){
+ 
+//   if(comm){  
+//        //  req.user.id is string and req.user._id is object...we will use the req.user.id to compare
+//     post.findById(comm.post,function(err,postuser){
+      
+//       if(postuser.user== req.user.id || comm.user==req.user.id){
+       
+//         let postid=comm.post;        //keeping it to delete the post because when we will delete the comm the post id in it will be lost
+       
+//          comm.remove();
+//                  // we are updating,this pull is syntax we are removing or pulling the comment id from the comment array..
+//         post.findByIdAndUpdate(postid,{ $pull : {comments:comm.id} },function(err,post){
+//             return res.redirect('back');
+//         });
+//       }
+  
+//       else{
+//       return res.redirect('back');
+//       }
+  
+//    });
+//   }
+//   else{
+//     return res.redirect('back'); 
+//   }
+
+//   });
 }
   
